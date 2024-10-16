@@ -1,0 +1,10 @@
+DOMAIN-SUFFIX,ocsp.apple.com,REJECT
+DOMAIN-SUFFIX,mesu.apple.com,REJECT
+DOMAIN-SUFFIX,gdmf.apple.com,REJECT
+DOMAIN-SUFFIX,xp.apple.com,REJECT
+DOMAIN-SUFFIX,appldnld.apple.com,REJECT
+DOMAIN-SUFFIX,swscan.apple.com,REJECT
+DOMAIN-SUFFIX,world-gen.g.aaplimg.com,REJECT
+DOMAIN-SUFFIX,radarsubmissions.apple.com,REJECT
+DOMAIN-SUFFIX,iphonesubmissions.apple.com,REJECT
+DOMAIN-SUFFIX,ocsp.int-x3.letsencrypt.org,REJECT
