@@ -42,7 +42,7 @@ def convert_csv_to_txt_with_country(csv_file_path, txt_file_path, N):
                 country_code = get_country_code(ip)
 
                 # 下载速度乘以100并转换为整数，输出格式: IP 地址:443#国家代码+下载速度*100
-                txtfile.write(f"{ip}:443#{country_code}{int(download_speed * 100)}\n")
+                txtfile.write(f"{ip}:8443#{country_code}{int(download_speed * 100)}\n")
 
             count += 1  # 每处理一行，计数器加1
             # time.sleep(1)  # 加上延时以避免请求过于频繁
