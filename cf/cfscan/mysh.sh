@@ -1,1 +1,1 @@
-chmod +x ./CloudflareST && ./CloudflareST -dn 10 -sl 10
+chmod +x ./CloudflareST && ./CloudflareST -dn 10 -sl 10 -f ip.txt
