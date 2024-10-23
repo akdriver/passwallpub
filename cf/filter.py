@@ -2,7 +2,8 @@ import csv
 import requests
 import time
 
-
+http_ports = [80,8080,8880,2052,2082,2086,2095]
+tls_ports = [443,2053,2083,2087,2096,8443]
 # 查询 IP 的国家代码
 def get_country_code(ip):
     try:
@@ -21,6 +22,7 @@ def get_country_code(ip):
 
 # 读取 CSV 文件并进行转换，保存为 txt 文件，且只处理前 N 行
 def convert_csv_to_txt_with_country(csv_file_path, txt_file_path, N):
+    tls_port_index = 0
     with open(csv_file_path, 'r', newline='', encoding='utf-8') as csvfile, \
             open(txt_file_path, 'w', encoding='utf-8') as txtfile:
 
@@ -40,10 +42,12 @@ def convert_csv_to_txt_with_country(csv_file_path, txt_file_path, N):
             if download_speed >= 10:
                 # 查询 IP 的国家代码
                 country_code = get_country_code(ip)
-
+                if tls_port_index > len(tls_ports)-1:
+                    tls_port_index = 0
+                port = tls_ports[tls_port_index]
                 # 下载速度乘以100并转换为整数，输出格式: IP 地址:443#国家代码+下载速度*100
-                txtfile.write(f"{ip}:8443#{country_code}{int(download_speed * 100)}\n")
-
+                txtfile.write(f"{ip}:{port}#P{port}{country_code}{int(download_speed * 100)}\n")
+                tls_port_index += 1
             count += 1  # 每处理一行，计数器加1
             # time.sleep(1)  # 加上延时以避免请求过于频繁
 
