@@ -8,11 +8,11 @@ tls_ports = [443,2053,2083,2087,2096,8443]
 def get_country_code(ip):
     try:
         # 使用 ip-api.com 查询 IP 的地理信息
-        response = requests.get(f"http://ip-api.com/json/{ip}?fields=countryCode,city")
+        response = requests.get(f"http://ip-api.com/json/{ip}?fields=countryCode")
         data = response.json()
         print(data)
         if response.status_code == 200 and "countryCode" in data:
-            return data["countryCode"] + ":" + data["city"]
+            return data["countryCode"]
         else:
             return "XX"  # 无法获取国家代码时返回 XX
     except Exception as e:
