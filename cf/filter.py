@@ -7,11 +7,11 @@ import time
 def get_country_code(ip):
     try:
         # 使用 ip-api.com 查询 IP 的地理信息
-        response = requests.get(f"http://ip-api.com/json/{ip}?fields=countryCode")
+        response = requests.get(f"http://ip-api.com/json/{ip}?fields=countryCode,city")
         data = response.json()
-
+        print(data)
         if response.status_code == 200 and "countryCode" in data:
-            return data["countryCode"]
+            return data["countryCode"] + ":" + data["city"]
         else:
             return "XX"  # 无法获取国家代码时返回 XX
     except Exception as e:
