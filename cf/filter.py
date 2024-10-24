@@ -21,10 +21,11 @@ def get_country_code(ip):
 
 
 # 读取 CSV 文件并进行转换，保存为 txt 文件，且只处理前 N 行
-def convert_csv_to_txt_with_country(csv_file_path, txt_file_path, N):
+def convert_csv_to_txt_with_country(csv_file_path, txt_file_path, trojan_file_path,N):
     tls_port_index = 0
     with open(csv_file_path, 'r', newline='', encoding='utf-8') as csvfile, \
-            open(txt_file_path, 'w', encoding='utf-8') as txtfile:
+            open(txt_file_path, 'w', encoding='utf-8') as txtfile,\
+            open(trojan_file_path, 'w', encoding='utf-8') as trojanfile:
 
         reader_csv = csv.reader(csvfile)
         next(reader_csv)  # 跳过表头
@@ -46,11 +47,12 @@ def convert_csv_to_txt_with_country(csv_file_path, txt_file_path, N):
                     tls_port_index = 0
                 port = tls_ports[tls_port_index]
                 # 下载速度乘以100并转换为整数，输出格式: IP 地址:443#国家代码+下载速度*100
-                txtfile.write(f"{ip}:{port}#P{port}{country_code}{int(download_speed * 100)}\n")
+                txtfile.write(f"{ip}:{port}#P{port}{country_code}{int(download_speed * 100)}@Vless\n")
+                trojanfile.write(f"{ip}:{port}#P{port}{country_code}{int(download_speed * 100)}@Trojan\n")
                 tls_port_index += 1
             count += 1  # 每处理一行，计数器加1
             # time.sleep(1)  # 加上延时以避免请求过于频繁
 
 
 # 调用函数，传入 CSV 文件路径、输出的 TXT 文件路径、和要处理的行数 N
-convert_csv_to_txt_with_country('./cfscan/result.csv', './cfscan/toutput.txt', N=10)
+convert_csv_to_txt_with_country('./cfscan/result.csv', './cfscan/toutput-vl.txt', './cfscan/toutput-tj.txt',N=10)
